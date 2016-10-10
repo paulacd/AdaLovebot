@@ -1,0 +1,14 @@
+{
+  "name": "hsf_twitterbot",
+  "version": "1.0.0",
+  "description": "twitterbot for hsf class on topic gender diversity in the tech industry",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "paula ceballos and zoe bachman",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
