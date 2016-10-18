@@ -33,7 +33,7 @@ var T = new Twit({
     var charms = require('./spells.json');
     var emotions = require('./emotions.json');
     var thesaurus = require('./synonyms.json');
-    // var tech = require('./tech.json');
+    var tech = require('./tech.json');
     var CS = require('./computerScience.json');
 
     //create empty arrays to store information
@@ -44,7 +44,7 @@ var T = new Twit({
     var techWords = [];
     var CSwords = [];
 
-    // console.log(CS.computer_sciences[0]);
+    // console.log(CS.computer_sciences[26]);
 
     //run through a for loop of the JSON file and store the information into 
     //separate arrays to be accessed later
@@ -53,33 +53,26 @@ var T = new Twit({
       var currentEffect = charms.spells[i].effect;
       incantations.push(currentIncant);
       effect.push(currentEffect);
-
-      // console.log("incantation: " + incantations[i] + " effect: " + effect[i]);
-
     }
-
-    // console.log(emotions)
 
     for(var i = 0; i < emotions.length; i++){
       var currentEmotion = emotions[i];
       feels.push(currentEmotion);
     }
 
-    for(var i = 0; i <thesaurus.length; i++){
+    for(var i = 0; i < thesaurus.length; i++){
       synonyms.push(thesaurus[i]);
     }
 
-    // for(var i = 0; i <tech.length; i++){
-    //   techWords.push(tech[i]);
-    // }
-
-    // console.log(techWords)
-
-    for(var i = 0; i <CS.length; i++){
-      CSwords.push(CS.computer_sciences[i]);
+    for(var i = 0; i <tech.length; i++){
+      techWords.push(tech[i]);
     }
 
-    console.log(CSwords);
+    // for(var i = 0; i < CS.length; i++){
+    //   CSwords.push(CS.computer_sciences[i]);
+    // }
+
+    // console.log(CSwords);
 
 
 
