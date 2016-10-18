@@ -9,6 +9,7 @@
   "author": "paula ceballos and zoe bachman",
   "license": "ISC",
   "dependencies": {
+    "tracery-grammar": "^2.7.2",
     "twit": "^2.2.5"
   }
 }
