@@ -33,11 +33,10 @@ var T = new Twit({
     var charms = require('./spells.json');
     var emotions = require('./emotions.json');
     var thesaurus = require('./synonyms.json');
-    var tech = require('./tech2.json');
+    var tech = require('./tech.json');
     var CS = require('./computerScience.json');
     var witchWords = require('./witchWords.json');
     var ing = require('./ingWords.json');
-    var hash = require('./hashtags.json')
 
     //create empty arrays to store information
     var incantations = [];
@@ -48,7 +47,6 @@ var T = new Twit({
     var CSwords = [];
     var WW = [];
     var ingWords = [];
-    var hashtags = [];
 
     //run through a for loop of the JSON file and store the information into 
     //separate arrays to be accessed later
@@ -79,11 +77,6 @@ var T = new Twit({
     for (var i =0; i < ing.length; i++){
       ingWords.push(ing[i]);
     }
-
-    for (var i = 0; i < hash.length; i++){
-      hashtags.push(hash[i]);
-    }
-
     // for(var i = 0; i < CS.length; i++){
     //   CSwords.push(CS.computer_sciences[i]);
     // }
@@ -94,7 +87,7 @@ var T = new Twit({
 
 //------------------GET-------------
 
-//working hashtags: cyberfeminism, femtech, womenintech, ladyboss
+//working hashtags: #cyberfeminism, #femtech, #womenintech, #ladyboss, #Tech, #Technology
 var params = {
   // q: '#cyberfeminism',
   q: '#femtech,#cyberfeminism',
@@ -134,7 +127,7 @@ setInterval(tweetIt, 60*5*1000);
 // setInterval(tweetIt, 15000);
 
 // Here is the bot!
-function tweetIt() {
+function tweetIt(txt) {
 
   var ranInc = incantations[Math.floor(Math.random()*incantations.length)];
   var ranEffect = effect[Math.floor(Math.random()*effect.length)];
@@ -144,7 +137,6 @@ function tweetIt() {
   var ranTech2 = techWords[Math.floor(Math.random()*techWords.length)];
   var ranWW = WW[Math.floor(Math.random()*WW.length)];
   var ranIng = ingWords[Math.floor(Math.random()*ingWords.length)];
-  var ranHash = hashtags[Math.floor(Math.random()*hashtags.length)];
 
   
 //------------Sentence Layout Structures-------------
@@ -157,7 +149,10 @@ function tweetIt() {
     // console.log(ranInc + ": a " + ranSyn + " for " + ranIng + " someone. Using" + ranCS + ", " + ranEffect.toLowerCase() + " on their "+ ranTech.toLowerCase()+ ".");
 
   // This is a random number bot
-  var tweet = ranTech2 + " " + ranInc + ": a " + ranSyn + " for " + ranIng + " someone. " + ranEffect + " on their "+ ranTech.toLowerCase()+ ". " + ranHash;
+  var tweet = {
+    status: txt
+    // ranTech2 + " " + ranInc + ": a " + ranSyn + " for " + ranIng + " someone. " + ranEffect + " on their "+ ranTech.toLowerCase()+ "."
+  }
 
   // Post that tweet!
   T.post('statuses/update', { status: tweet }, tweeted);
@@ -176,6 +171,34 @@ function tweetIt() {
 }
 
 //-----------------------POST---------------
+
+//-----------------------STREAM---------------
+
+//Setting up a user stream
+var stream = T.stream('user');
+
+//Anytime someone follows me
+stream.on('follow', followed);
+
+function followed(eventMsg) {
+  console.log("Follow event!");
+  var name = eventMsg.source.name;
+  var screenName = eventMsg.source.screen_name;
+  tweetIt('@'+screenName + 'thanks for the follow! Remember to throw a pinch of salt over your shoulder to avoid the evil eye');
+
+}
+
+//-----------------------STREAM---------------
+
+
+
+
+
+
+
+
+
+
 
 
 //based on twitter bot examples from 
